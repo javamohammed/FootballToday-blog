@@ -1,0 +1,54 @@
+<!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <p class="centered">
+          	<a href="profile.html">
+          	<img th:src="${(#authentication.getPrincipal().avatar == null ) ? '/img/avatar.png' : #authentication.getPrincipal().avatar }" class="img-circle" width="80"> 
+          	</a>
+          	
+          </p>
+          <div sec:authorize="isAuthenticated()">
+          </div>
+          <h5 class="centered" sec:authentication="principal.name" />
+          <li class="mt">
+            <a class="menu-cible"  th:classappend="${active=='dashboard'} ? 'active' : ''" th:href="@{/admin/dashboard}">
+              <i class="fa fa-dashboard"></i>
+              <span>Dashboard</span>
+              </a>
+          </li>
+          
+          <li>
+            <a class="menu-cible"  th:classappend="${active=='newArticle'} ? 'active' : ''" th:href="@{/admin/new}">
+              <i class="fa fa-plus"></i>
+              <span>New Article </span>
+              </a>
+          </li>
+          
+          <li>
+            <a class="menu-cible"  th:classappend="${active=='Articles'} ? 'active' : ''" th:href="@{/admin/articles}">
+              <i class="fa fa-list"></i>
+              <span>Articles</span>
+              </a>
+          </li>
+          
+          <li>
+            <a class="menu-cible"  th:classappend="${active=='Comments'} ? 'active' : ''" th:href="@{/admin/comments}">
+              <i class="fa fa-comments"></i>
+              <span>Comments</span>
+              </a>
+          </li>
+          
+          <li>
+            <a class="menu-cible"  th:classappend="${active=='Profile'} ? 'active' : ''" th:href="@{/admin/profile}">
+              <i class="fa fa-user"></i>
+              <span>Profile</span>
+              </a>
+          </li>
+		 
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->

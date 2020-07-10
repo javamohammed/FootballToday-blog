@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="admin/layouts/header.html"></th:block>
+
+  <link  th:href="@{/lib/bootstrap-wysihtml5/bootstrap-wysihtml5.css}" rel="stylesheet">
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper site-min-height">
+        <h3><i class="fa fa-angle-right"></i> Articles</h3>
+        <div class="row mt">
+          <div class="col-lg-12">
+				<div class="alert alert-success"  th:if="${message != null}" th:utext="${message}"/>
+			  <section id="no-more-tables">
+                <table class="table table-bordered table-striped table-condensed cf">
+                  <thead class="cf">
+                    <tr>
+                      <th><i class="fa fa-key"></i> Id</th>
+                      <th><i class="fa fa-text-width"></i> Author</th>
+                      <th><i class="fa fa-text-width"></i> Email</th>
+                      <th><i class="fa fa-text-width"></i> Article</th>
+                      <th><i class="fa fa-calendar-o"></i> Created At</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  th:each="comment: ${comments}">
+                       <td data-title="Id" th:text="${comment.id}" />
+                       <td data-title="Author"  th:text="${comment.author}" />
+                       <td data-title="Email" th:text="${comment.email}"/>
+                       <td data-title="Article" th:text="${comment.article.title}"/>
+                       <td data-title="Created At" th:text="${comment.createdAt}"/>
+                       
+                       <td data-title="Actions">
+						 	<a class="btn btn-success btn-xs" th:href="@{/admin/comment/}+${comment.id}"><i class="fa fa-eye"></i></a>
+						 	<a class="btn btn-danger btn-xs allowedClass" th:id="${comment.id}" data-toggle="modal" data-target="#myModalallowed"><i class="fa fa-check-square"></i></a>
+                      		<a class="btn btn-danger btn-xs deleteClass" th:id="${comment.id}" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o "></i></a>
+                      		
+					   </td>
+                           
+                    </tr>
+             
+                  </tbody>
+                </table>
+              </section>
+			            
+			 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="myModalLabel">Delete Comment</h4>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to delete this Comment? 
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <a href="#" id="delete-a" class="btn btn-danger">delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="modal fade" id="myModalallowed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="myModalLabel">Allowed Comment</h4>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to Allowed this Comment? 
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <a href="#" id="allowed-a" class="btn btn-success">allowed</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+
+
+          </div>
+        </div>
+      </section>
+      <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+  
+
+<th:block th:include="admin/layouts/footer.html"></th:block>
+
+   <script type="text/javascript">
+	  $('.deleteClass').click(function() {
+		  $("#delete-a").attr("href", "/admin/comment/delete/"+this.id);
+			
+		});
+	  
+	  $('.allowedClass').click(function() {
+		  $("#allowed-a").attr("href", "/admin/comment/allowed/"+this.id);
+			
+		});
+  
+  </script>>
+</html>

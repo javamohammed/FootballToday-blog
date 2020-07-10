@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="admin/layouts/header.html"></th:block>
+
+  <link  th:href="@{/lib/bootstrap-wysihtml5/bootstrap-wysihtml5.css}" rel="stylesheet">
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="col-lg-12 mt">
+          <div class="row content-panel">
+            <div class="col-lg-10 col-lg-offset-1">
+              <div class="invoice-body">
+                <div class="pull-left">
+                  <h1 th:text="|Title Article :  ${comment.article.title}|"/>
+                </div>
+                <!-- /pull-left -->
+                <div class="clearfix"></div>
+                <br>
+                <br>
+                <br>
+                <!-- /col-lg-10 -->
+                <h3>Comment:</h3>
+                <div th:utext="${comment.content}" />
+                <br>
+                <br>
+              </div>
+              <!--/col-lg-12 mt -->
+      </section>
+      <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+  
+
+<th:block th:include="admin/layouts/footer.html"></th:block>
+
+  </script>
+</html>

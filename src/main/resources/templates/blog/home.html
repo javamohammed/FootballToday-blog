@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <th:block th:include="blog/layouts/header.html"></th:block>
+    
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12">
+            <h2>Recent Posts</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 mb-4" th:each="article : ${articles.content}">
+            <div class="entry2">
+              <a th:href="@{/article/}+${article.id}"><img th:src="@{/blog/images/img_1.jpg}" alt="Image" class="img-fluid rounded"></a>
+              <div class="excerpt">
+              <span class="post-category text-white bg-secondary mb-3"  th:text="${article.tags}" />
+
+              <h2><a th:href="@{/article/}+${article.id}" th:text="${article.title}" /></h2>
+              <div class="post-meta align-items-center text-left clearfix">
+                <figure class="author-figure mb-0 mr-3 float-left"><img  th:src="${(article.user.avatar == null ) ? '/img/avatar.png' : article.user.avatar }" alt="Image" class="img-fluid"></figure>
+                <span class="d-inline-block mt-1">By <span th:text="${article.user.name}" /> </span>
+                <span  th:text="${#dates.format(article.createdAtT, 'dd-MMM-yyyy')}" />
+              </div>
+             
+              <p  th:with="body=${#strings.substring(article.body,0,50)}" th:text="${T(org.jsoup.Jsoup).parse(body).text()}"  />
+                <p><a th:href="@{/article/}+${article.id}">Read More</a></p>
+              </div>
+            </div>
+          </div>
+         
+          
+        </div>
+        <div class="row text-center pt-5 border-top">
+          <div class="col-md-12">
+            <div   class="custom-pagination" >
+            <a  th:if="${articles.totalPages > 0}" th:each="pageNumber : ${pageNumbers}" th:href="@{/(page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==articles.number + 1} ? active-pagination"></a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+    
+  <th:block th:include="blog/layouts/footer.html"></th:block>
+</html>
